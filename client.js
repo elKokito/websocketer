@@ -1,4 +1,5 @@
 var config = require('./.config.json');
+console.log('connecting to -> ', config.remote_server);
 var s = require('socket.io-client')(config.remote_server);
 var request = require('superagent');
 
