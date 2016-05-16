@@ -17,7 +17,7 @@ app.get('/all_torrents', (req, res) => {
     s.emit('all_torrents');
 });
 
-app.get('/movies', (req, res, next) => {
+app.get('/movies', (req, res) => {
     console.log('req -> /movies');
     s.emit('movies');
     s.once('movies', (data) => {
@@ -25,7 +25,7 @@ app.get('/movies', (req, res, next) => {
     });
 })
 
-app.get('/series', (req, res, next) => {
+app.get('/series', (req, res) => {
     console.log('req -> /series');
     s.emit('series');
     s.once('series', (data) => {
@@ -33,7 +33,7 @@ app.get('/series', (req, res, next) => {
     });
 })
 
-app.post('/add_torrent', (req, res, next) => {
+app.post('/add_torrent', (req, res) => {
     console.log('req -> /add_torrent', req.body);
     s.emit('add_torrent', req.body);
     s.once('add_torrent', (data) => {
@@ -41,20 +41,29 @@ app.post('/add_torrent', (req, res, next) => {
     });
 })
 
-app.post('/remove_torrent', (req, res, next) => {
-    console.log('req -> /remove_torrent');
-    s.emit('remove_torrent', req.text);
+app.post('/remove_torrent', (req, res) => {
+    console.log('req -> /remove_torrent', req.body);
+    s.emit('remove_torrent', req.body);
     s.once('remove_torrent', (data) => {
         res.send(data);
     });
 })
 
-app.get('/torrents_status', (req, res, next) => {
+app.get('/torrents_status', (req, res) => {
     console.log('req -> /torrents_status');
+    s.emit('torrents_status');
     s.once('torrents_status', (data) => {
         res.send(data);
     });
 })
+
+app.post('/search', (req, res) => {
+    console.log('req -> /search');
+    s.emit('search', req.body);
+    s.once('search' (data) => {
+        res.send(data);
+    });
+});
 
 app.get('/test_websocket', (req, res, next) => {
     response = s ? 'connected': 'disconnect';
