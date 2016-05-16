@@ -60,7 +60,7 @@ app.get('/torrents_status', (req, res) => {
 app.post('/search', (req, res) => {
     console.log('req -> /search');
     s.emit('search', req.body);
-    s.once('search' (data) => {
+    s.once('search', (data) => {
         res.send(data);
     });
 });
