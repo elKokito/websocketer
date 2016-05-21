@@ -55,7 +55,18 @@ s.on('torrents_status', (data) => {
         .get(config.local_server + 'torrents_status')
         .end((err, res) => {
             console.log(chalk.cyan(res.text));
-            s.emit('torrents_status');
+            s.emit('torrents_status', res.text);
+        });
+});
+
+s.on('remove_torrent', (data) => {
+    console.log(chalk.blue('remove_torrent'));
+    request
+        .post(config.local_server + 'remove_torrent')
+        .send(data)
+        .end((err, res) => {
+            console.log(chalk.cyan(res.text));
+            s.emit('remove_torrent', res.text);
         });
 });
 
