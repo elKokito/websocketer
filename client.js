@@ -80,3 +80,25 @@ s.on('search', (data) => {
             s.emit('search', res.text);
         });
 });
+
+s.on('start_torrent', data => {
+    console.log(chalk.blue('start_torrent', data));
+    request
+        .post(config.local_server + 'start_torrent')
+        .send(data)
+        .end((err, res) => {
+            console.log(chalk.cyan(res.text));
+            s.emit('start_torrent', res.text);
+        });
+});
+
+s.on('pause_torrent', data => {
+    console.log(chalk.blue('pause_torrent', data));
+    request
+        .post(config.local_server + 'pause_torrent')
+        .send(data)
+        .end((err, res) => {
+            console.log(chalk.cyan(res.text));
+            s.emit('pause_torrent', res.text);
+        });
+});

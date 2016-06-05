@@ -65,6 +65,22 @@ app.post('/search', (req, res) => {
     });
 });
 
+app.post('/start_torrent', (req, res) => {
+    console.log('req -> /start_torrent');
+    s.emit('start_torrent', req.body);
+    s.once('start_torrent', data => {
+        res.send(data);
+    });
+});
+
+app.post('/pause_torrent', (req, res) => {
+    console.log('req -> /pause_torrent');
+    s.emit('pause_torrent', req.body);
+    s.once('pause_torrent', data => {
+        res.send(data);
+    });
+});
+
 app.get('/test_websocket', (req, res, next) => {
     response = s ? 'connected': 'disconnect';
     res.send(response);
