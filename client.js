@@ -39,7 +39,7 @@ s.on('series', function(data) {
 });
 
 s.on('add_torrent', function(data) {
-    console.log(chalk.blue('add_torrent ->', data));
+    console.log(chalk.blue('add_torrent ->', JSON.stringify(data)));
     request
         .post(config.local_server + 'add_torrent')
         .send(data)
@@ -71,7 +71,7 @@ s.on('remove_torrent', (data) => {
 });
 
 s.on('search', (data) => {
-    console.log(chalk.blue('search', data));
+    console.log(chalk.blue('search', JSON.stringify(data)));
     request
         .post(config.local_server + 'search')
         .send(data)
